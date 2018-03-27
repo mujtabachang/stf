@@ -1,0 +1,49 @@
+.row.stf-info.selectable(ng-controller='InfoCtrl',
+  angular-packery='{draggable: true, draggableHandle: ".heading i"}')
+
+  .col-md-4-x.packery-item
+    .widget-container.fluid-height
+      .heading
+        stacked-icon(icon='fa-bolt', color='color-yellow')
+        span(translate) Cispa Info
+
+
+      .widget-content.padded-small
+        table.table.table-condensed.table-hover.table-infocard
+
+          tbody
+            tr
+              td(translate) Health
+              td {{device.battery.health | batteryHealth | translate}}
+            tr
+              td(translate) Power Source
+              td {{device.battery.source | batterySource | translate}}
+            tr
+              td(translate) Status
+              td {{device.battery.status | batteryStatus | translate}}
+            tr
+              td(translate) Level
+              td
+                uib-progressbar(value='device.battery.level', animate='false', max='device.battery.scale', type='success')
+                  span {{ device.battery.level / device.battery.scale * 100 }}%
+            tr
+              td(translate) Temperature
+              td {{device.battery.temp}} °C
+            tr
+              td(translate) Voltage
+              td {{device.battery.voltage}} v
+
+        button.btn.btn-sm.btn-primary-outline(ng-click='getProcesses()',
+          title='{{"Get the running processes on the device"|translate}}')
+            i.fa.fa-camera
+            span(translate) Get Processes
+          //button.btn.btn-sm.btn-info-outline(ng-click='getProcesses()',
+            title='{{"Take Pageshot (Needs WebView running)"|translate}}',
+            ng-if='$root.platform == "web" && $root.browser == "webview"')
+            i.fa.fa-camera-retro(translate)
+            span(translate) Pageshot
+
+        .button-spacer
+
+        pre.shell-results.selectable(ng-show='data') {{data}}
+

@@ -1,0 +1,16 @@
+
+.row.stf-info.selectable(ng-controller='InfoCtrl',
+  angular-packery='{draggable: true, draggableHandle: ".heading i"}')
+
+  .col-md-1-x.packery-item
+    .widget-container.fluid-height
+      .heading
+        stacked-icon(icon='fa-bolt', color='color-yellow')
+        span(translate) Cispa Info
+        button.btn.btn-sm.btn-primary-outline(ng-click='getProcesses()',
+          title='{{"Get the running processes on the device"|translate}}')
+            i.fa.fa-camera
+            span(translate) Get Processes
+        .processes
+          {{data}}
+
